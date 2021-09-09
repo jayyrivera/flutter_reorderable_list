@@ -129,11 +129,9 @@ class ReorderableListener extends StatelessWidget {
   @protected
   MultiDragGestureRecognizer createRecognizer({
     required Object? debugOwner,
-    PointerDeviceKind? kind,
   }) {
     return _Recognizer(
       debugOwner: debugOwner,
-      kind: kind,
     );
   }
 
@@ -147,7 +145,7 @@ class ReorderableListener extends StatelessWidget {
           key: state!.key,
           event: event!,
           scrollable: scrollable,
-          recognizer: createRecognizer(debugOwner: this, kind: event.kind));
+          recognizer: createRecognizer(debugOwner: this));
     }
   }
 }
@@ -761,11 +759,10 @@ class _VerticalPointerState extends MultiDragPointerState {
 // VerticalDragGestureRecognizer waits for kTouchSlop to be reached; We don't want that
 // when reordering items
 //
-class _Recognizer extends MultiDragGestureRecognizer<_VerticalPointerState> {
+class _Recognizer extends MultiDragGestureRecognizer {
   _Recognizer({
     required Object? debugOwner,
-    PointerDeviceKind? kind,
-  }) : super(debugOwner: debugOwner, kind: kind);
+  }) : super(debugOwner: debugOwner);
 
   @override
   _VerticalPointerState createNewPointerState(PointerDownEvent event) {
